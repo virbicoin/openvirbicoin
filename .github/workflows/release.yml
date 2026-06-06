@@ -97,3 +97,6 @@ jobs:
         with:
           files: artifacts/**/*
           generate_release_notes: true
+          # Mark pre-release tags (anything with a hyphen, e.g. v3.3.5-vbc1) as
+          # a GitHub pre-release; plain version tags (v3.3.5) publish normally.
+          prerelease: ${{ contains(github.ref_name, '-') }}
