@@ -1,0 +1,158 @@
+{
+	"name": "VirBiCoin",
+	"dataDir": "virbicoin",
+	"engine": {
+		"Ethash": {
+			"params": {
+				"minimumDifficulty": "0x20000",
+				"difficultyBoundDivisor": "0x200",
+				"durationLimit": "0xc",
+				"blockReward": "0x6f05b59d3b200000",
+				"homesteadTransition": "0x0",
+				"eip100bTransition": "0x0",
+				"difficultyBombDelays": {
+					"0x0": "0x4c4b40"
+				}
+			}
+		}
+	},
+	"params": {
+		"gasLimitBoundDivisor": "0x400",
+		"accountStartNonce": "0x0",
+		"maximumExtraDataSize": "0x20",
+		"minGasLimit": "0x1388",
+		"networkID": "0x149",
+		"chainID": "0x149",
+		"maxCodeSize": "0x6000",
+		"maxCodeSizeTransition": "0x0",
+		"eip150Transition": "0x0",
+		"eip155Transition": "0x0",
+		"eip160Transition": "0x0",
+		"eip161abcTransition": "0x0",
+		"eip161dTransition": "0x0",
+		"eip140Transition": "0x0",
+		"eip211Transition": "0x0",
+		"eip214Transition": "0x0",
+		"eip658Transition": "0x0",
+		"eip145Transition": "0x0",
+		"eip1014Transition": "0x0",
+		"eip1052Transition": "0x0",
+		"eip1283Transition": "0x0",
+		"eip1283DisableTransition": "0x5f5e100",
+		"eip1283ReenableTransition": "0x1dcd6500",
+		"eip1344Transition": "0x1dcd6500",
+		"eip1706Transition": "0x1dcd6500",
+		"eip1884Transition": "0x1dcd6500",
+		"eip2028Transition": "0x1dcd6500"
+	},
+	"genesis": {
+		"seal": {
+			"ethereum": {
+				"nonce": "0x0000000000008329",
+				"mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+			}
+		},
+		"difficulty": "0x400",
+		"author": "0x0000000000000000000000000000000000000000",
+		"timestamp": "0x0",
+		"parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+		"extraData": "0x",
+		"gasLimit": "0x8000000"
+	},
+	"nodes": [
+		"enode://e8853097e51e155d6bac72b9ebff92ccdf5aa8ee9a845b92f6af969120b9ed017d6b79f231cf05f68e68237a824946f502b84914e0737e81c7a252a0174764f8@140.238.40.136:28329",
+		"enode://e8853097e51e155d6bac72b9ebff92ccdf5aa8ee9a845b92f6af969120b9ed017d6b79f231cf05f68e68237a824946f502b84914e0737e81c7a252a0174764f8@158.101.131.198:28329",
+		"enode://141e23b0dc593a3e3474485d470df0057f2d710cd2d5dec733a7f2f8e6df81b034c4f5ff65e192af604c0d0f8bf2c53d2671190e3c9dcf78ada91e8810a43e54@158.101.135.30:28329",
+		"enode://77973b63ce0003ff40c1cfb10165a1045d156865ef682c65baf4501d09abe0f37705f9626ff2202a85be0f858935c82494d729ac35afa593e454a9c7a021c309@8.231.239.110:28329",
+		"enode://273bd300871544f39fcb3f0e9376c880cee1070db839da8ef6e1313a07cb6c11e6cdde0a78f1c8b1affb5b3f570f62c6cbddead3068aaf2e81b13f0509a0f737@13.202.197.147:28329"
+	],
+	"accounts": {
+		"0x0000000000000000000000000000000000000001": {
+			"builtin": {
+				"name": "ecrecover",
+				"pricing": { "linear": { "base": 3000, "word": 0 } }
+			}
+		},
+		"0x0000000000000000000000000000000000000002": {
+			"builtin": {
+				"name": "sha256",
+				"pricing": { "linear": { "base": 60, "word": 12 } }
+			}
+		},
+		"0x0000000000000000000000000000000000000003": {
+			"builtin": {
+				"name": "ripemd160",
+				"pricing": { "linear": { "base": 600, "word": 120 } }
+			}
+		},
+		"0x0000000000000000000000000000000000000004": {
+			"builtin": {
+				"name": "identity",
+				"pricing": { "linear": { "base": 15, "word": 3 } }
+			}
+		},
+		"0x0000000000000000000000000000000000000005": {
+			"builtin": {
+				"name": "modexp",
+				"pricing": {
+					"0x0": {
+						"info": "EIP-198: Big integer modular exponentiation. Byzantium hardfork (block 0)",
+						"price": { "modexp": { "divisor": 20 } }
+					}
+				}
+			}
+		},
+		"0x0000000000000000000000000000000000000006": {
+			"builtin": {
+				"name": "alt_bn128_add",
+				"pricing": {
+					"0x0": {
+						"price": { "alt_bn128_const_operations": { "price": 500 } }
+					},
+					"0x1dcd6500": {
+						"info": "EIP-1108 transition at Istanbul (block 500000000)",
+						"price": { "alt_bn128_const_operations": { "price": 150 } }
+					}
+				}
+			}
+		},
+		"0x0000000000000000000000000000000000000007": {
+			"builtin": {
+				"name": "alt_bn128_mul",
+				"pricing": {
+					"0x0": {
+						"price": { "alt_bn128_const_operations": { "price": 40000 } }
+					},
+					"0x1dcd6500": {
+						"info": "EIP-1108 transition at Istanbul (block 500000000)",
+						"price": { "alt_bn128_const_operations": { "price": 6000 } }
+					}
+				}
+			}
+		},
+		"0x0000000000000000000000000000000000000008": {
+			"builtin": {
+				"name": "alt_bn128_pairing",
+				"pricing": {
+					"0x0": {
+						"price": { "alt_bn128_pairing": { "base": 100000, "pair": 80000 } }
+					},
+					"0x1dcd6500": {
+						"info": "EIP-1108 transition at Istanbul (block 500000000)",
+						"price": { "alt_bn128_pairing": { "base": 45000, "pair": 34000 } }
+					}
+				}
+			}
+		},
+		"0x0000000000000000000000000000000000000009": {
+			"builtin": {
+				"name": "blake2_f",
+				"activate_at": "0x1dcd6500",
+				"pricing": { "blake2_f": { "gas_per_round": 1 } }
+			}
+		},
+		"0x950302976387b43e042aea242ae8dab8e5c204d1": {
+			"balance": "0xde0b6b3a7640000"
+		}
+	}
+}

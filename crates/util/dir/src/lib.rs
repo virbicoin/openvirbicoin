@@ -278,9 +278,9 @@ fn default_path(t: AppDataType) -> Option<PathBuf> {
 
     let mut root = data_root(t).ok()?;
     root.push(if LOWERCASE {
-        "openethereum"
+        "openvirbicoin"
     } else {
-        "OpenEthereum"
+        "OpenVirBiCoin"
     });
     Some(root)
 }
@@ -288,7 +288,7 @@ fn default_path(t: AppDataType) -> Option<PathBuf> {
 fn fallback_path() -> PathBuf {
     let mut p = PathBuf::new();
     p.push("$HOME");
-    p.push(".openethereum");
+    p.push(".openvirbicoin");
     p
 }
 

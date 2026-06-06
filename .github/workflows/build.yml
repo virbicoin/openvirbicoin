@@ -1,9 +1,11 @@
 name:                           Build Release Suite
 
+# NOTE: openvirbicoin publishes release binaries via .github/workflows/release.yml
+# (triggered on version tags). This legacy OpenEthereum pipeline pushed artifacts
+# to a Parity-owned AWS S3 bucket and targeted now-removed runners (ubuntu-16.04),
+# so its automatic tag trigger is disabled. Kept for reference / manual runs only.
 on:
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
 
 # Global vars
 env:

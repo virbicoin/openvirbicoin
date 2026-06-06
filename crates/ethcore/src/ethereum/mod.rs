@@ -50,6 +50,14 @@ pub fn new_foundation<'a, T: Into<SpecParams<'a>>>(params: T) -> Spec {
     )
 }
 
+/// Create a new VirBiCoin mainnet chain spec.
+pub fn new_virbicoin<'a, T: Into<SpecParams<'a>>>(params: T) -> Spec {
+    load(
+        params.into(),
+        include_bytes!("../../res/chainspec/virbicoin.json"),
+    )
+}
+
 /// Create a new POA Network mainnet chain spec.
 pub fn new_poanet<'a, T: Into<SpecParams<'a>>>(params: T) -> Spec {
     load(

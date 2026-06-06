@@ -1,19 +1,36 @@
-# OpenEthereum
+# openvirbicoin (ovbc)
 
-Fast and feature-rich multi-network Ethereum client.
+Fast Rust client for the **VirBiCoin** network — an OpenEthereum fork that ships
+with VirBiCoin built in.
 
-[» Download the latest release «](https://github.com/openethereum/openethereum/releases/latest)
+[» Download the latest release «](https://github.com/virbicoin/openvirbicoin/releases/latest)
 
 [![GPL licensed][license-badge]][license-url]
-[![Build Status][ci-badge]][ci-url]
-[![Discord chat][chat-badge]][chat-url]
 
 [license-badge]: https://img.shields.io/badge/license-GPL_v3-green.svg
 [license-url]: LICENSE
-[ci-badge]: https://github.com/openethereum/openethereum/workflows/Build%20and%20Test%20Suite/badge.svg
-[ci-url]: https://github.com/openethereum/openethereum/actions
-[chat-badge]: https://img.shields.io/discord/669192218728202270.svg?logo=discord
-[chat-url]: https://discord.io/openethereum
+
+## Quick start
+
+Download the `ovbc` binary for your platform from the
+[Releases page](https://github.com/virbicoin/openvirbicoin/releases/latest),
+make it executable, and run it — **no flags or config files required**:
+
+```bash
+./ovbc
+```
+
+It connects to the VirBiCoin network (chainId 329) out of the box and exposes
+the JSON-RPC endpoints on the standard VirBiCoin ports:
+
+| Service  | Port  |
+| -------- | ----- |
+| HTTP-RPC | 8329  |
+| WebSocket| 8330  |
+| P2P      | 28329 |
+
+`ovbc` is the Rust counterpart to [go-virbicoin](https://github.com/virbicoin/go-virbicoin)
+(`gvbc`); the two are not meant to run on the same machine at the same time.
 
 ## Table of Contents
 
@@ -22,7 +39,7 @@ Fast and feature-rich multi-network Ethereum client.
 3. [Building](#chapter-003)<br>
   3.1 [Building Dependencies](#chapter-0031)<br>
   3.2 [Building from Source Code](#chapter-0032)<br>
-  3.3 [Starting OpenEthereum](#chapter-0034)
+  3.3 [Starting ovbc](#chapter-0034)
 4. [Testing](#chapter-004)
 5. [Documentation](#chapter-005)
 6. [Toolchain](#chapter-006)
@@ -32,7 +49,7 @@ Fast and feature-rich multi-network Ethereum client.
 
 ## 1. Description <a id="chapter-001"></a>
 
-**Built for mission-critical use**: Miners, service providers, and exchanges need fast synchronisation and maximum uptime. OpenEthereum provides the core infrastructure essential for speedy and reliable services.
+**Built for mission-critical use**: Miners, service providers, and exchanges need fast synchronisation and maximum uptime. openvirbicoin provides the core infrastructure essential for speedy and reliable services.
 
 - Clean, modular codebase for easy customisation
 - Advanced CLI-based client

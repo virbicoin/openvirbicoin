@@ -1,5 +1,5 @@
 [package]
-description = "OpenEthereum"
+description = "openvirbicoin (ovbc) - VirBiCoin client, an OpenEthereum fork"
 name = "openethereum"
 # NOTE Make sure to update util/version/Cargo.toml as well
 version = "3.3.5"
@@ -114,7 +114,7 @@ path = "bin/oe/lib.rs"
 
 [[bin]]
 path = "bin/oe/main.rs"
-name = "openethereum"
+name = "ovbc"
 
 [profile.test]
 lto = false

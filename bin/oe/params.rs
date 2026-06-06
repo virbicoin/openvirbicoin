@@ -39,6 +39,7 @@ use crate::configuration;
 #[derive(Debug, PartialEq)]
 pub enum SpecType {
     Foundation,
+    Virbicoin,
     Poanet,
     Xdai,
     Volta,
@@ -60,7 +61,7 @@ pub enum SpecType {
 
 impl Default for SpecType {
     fn default() -> Self {
-        SpecType::Foundation
+        SpecType::Virbicoin
     }
 }
 
@@ -70,6 +71,7 @@ impl str::FromStr for SpecType {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let spec = match s {
             "eth" | "ethereum" | "foundation" | "mainnet" => SpecType::Foundation,
+            "virbicoin" | "vbc" => SpecType::Virbicoin,
             "poanet" | "poacore" => SpecType::Poanet,
             "xdai" => SpecType::Xdai,
             "volta" => SpecType::Volta,
@@ -96,6 +98,7 @@ impl fmt::Display for SpecType {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.write_str(match *self {
             SpecType::Foundation => "foundation",
+            SpecType::Virbicoin => "virbicoin",
             SpecType::Poanet => "poanet",
             SpecType::Xdai => "xdai",
             SpecType::Volta => "volta",
@@ -122,6 +125,7 @@ impl SpecType {
         let params = params.into();
         match *self {
             SpecType::Foundation => Ok(ethereum::new_foundation(params)),
+            SpecType::Virbicoin => Ok(ethereum::new_virbicoin(params)),
             SpecType::Poanet => Ok(ethereum::new_poanet(params)),
             SpecType::Xdai => Ok(ethereum::new_xdai(params)),
             SpecType::Volta => Ok(ethereum::new_volta(params)),

@@ -246,9 +246,9 @@ usage! {
             "--mode-alarm=[SECS]",
             "Specify the number of seconds before auto sleep reawake timeout occurs when mode is passive",
 
-            ARG arg_chain: (String) = "foundation", or |c: &Config| c.parity.as_ref()?.chain.clone(),
+            ARG arg_chain: (String) = "virbicoin", or |c: &Config| c.parity.as_ref()?.chain.clone(),
             "--chain=[CHAIN]",
-            "Specify the blockchain type. CHAIN may be either a JSON chain specification file or ethereum, poacore, xdai, volta, ewc, musicoin, ellaism, mix, callisto, morden, ropsten, kovan, rinkeby, goerli, poasokol, testnet, yolo3 or dev.",
+            "Specify the blockchain type. CHAIN may be either a JSON chain specification file or virbicoin, ethereum, poacore, xdai, volta, ewc, musicoin, ellaism, mix, callisto, morden, ropsten, kovan, rinkeby, goerli, poasokol, testnet, yolo3 or dev.",
 
             ARG arg_keys_path: (String) = "$BASE/keys", or |c: &Config| c.parity.as_ref()?.keys_path.clone(),
             "--keys-path=[PATH]",
@@ -326,7 +326,7 @@ usage! {
             "--warp-barrier=[NUM]",
             "When warp enabled never attempt regular sync before warping to block NUM.",
 
-            ARG arg_port: (u16) = 30303u16, or |c: &Config| c.network.as_ref()?.port.clone(),
+            ARG arg_port: (u16) = 28329u16, or |c: &Config| c.network.as_ref()?.port.clone(),
             "--port=[PORT]",
             "Override the port on which the node should listen.",
 
@@ -401,7 +401,7 @@ usage! {
             "--jsonrpc-experimental",
             "Enable experimental RPCs. Enable to have access to methods from unfinalised EIPs in all namespaces",
 
-            ARG arg_jsonrpc_port: (u16) = 8545u16, or |c: &Config| c.rpc.as_ref()?.port.clone(),
+            ARG arg_jsonrpc_port: (u16) = 8329u16, or |c: &Config| c.rpc.as_ref()?.port.clone(),
             "--jsonrpc-port=[PORT]",
             "Specify the port portion of the HTTP JSON-RPC API server.",
 
@@ -442,7 +442,7 @@ usage! {
             "--no-ws",
             "Disable the WebSockets JSON-RPC server.",
 
-            ARG arg_ws_port: (u16) = 8546u16, or |c: &Config| c.websockets.as_ref()?.port.clone(),
+            ARG arg_ws_port: (u16) = 8330u16, or |c: &Config| c.websockets.as_ref()?.port.clone(),
             "--ws-port=[PORT]",
             "Specify the port portion of the WebSockets JSON-RPC server.",
 
