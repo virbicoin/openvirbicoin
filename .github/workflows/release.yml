@@ -33,9 +33,9 @@ jobs:
           - os: macos-13
             target: x86_64-apple-darwin
             archive: ovbc-macos-x86_64.tar.gz
-          - os: macos-14
-            target: aarch64-apple-darwin
-            archive: ovbc-macos-aarch64.tar.gz
+          # aarch64-apple-darwin is intentionally omitted: OpenEthereum's pinned
+          # ring 0.14 has no Apple Silicon assembly and fails to build there.
+          # Apple Silicon users can run the x86_64 macOS binary via Rosetta 2.
           - os: windows-2022
             target: x86_64-pc-windows-msvc
             archive: ovbc-windows-x86_64.zip
@@ -53,6 +53,22 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libudev-dev cmake clang libclang-dev pkg-config
+
+      # The old cmake 0.1.42 crate (pulled in by parity-snappy-sys) cannot
+      # detect the Visual Studio 2022 generator. Set up the MSVC environment and
+      # force the Ninja generator, which sidesteps the VS-generator probing.
+      - name: Set up MSVC environment
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install Ninja (Windows)
+        if: runner.os == 'Windows'
+        uses: seanmiddleditch/gha-setup-ninja@v5
+
+      - name: Use Ninja for CMake (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: echo "CMAKE_GENERATOR=Ninja" >> "$GITHUB_ENV"
 
       - name: Cache cargo registry and target
         uses: actions/cache@v4
