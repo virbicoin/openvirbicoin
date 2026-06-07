@@ -118,3 +118,7 @@ jobs:
           # Mark pre-release tags (anything with a hyphen, e.g. v3.3.5-vbc1) as
           # a GitHub pre-release; plain version tags (v3.3.5) publish normally.
           prerelease: ${{ contains(github.ref_name, '-') }}
+          # Create the release as a draft so assets can be attached first. This
+          # repository uses immutable releases, which reject asset uploads after
+          # a release is published; publish the draft manually once it's ready.
+          draft: true
