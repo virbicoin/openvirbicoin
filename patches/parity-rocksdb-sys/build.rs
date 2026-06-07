@@ -7,15 +7,6 @@ use cmake::Config;
 fn main() {
     let mut cfg = Config::new("rocksdb");
 
-    // Pass the bundled Find*.cmake module directory as an absolute path. On
-    // newer CMake the in-tree `list(APPEND CMAKE_MODULE_PATH ...)` is not always
-    // honoured for the module-mode find_package(snappy) calls, so set it here.
-    let module_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("rocksdb")
-        .join("cmake")
-        .join("modules");
-    cfg.define("CMAKE_MODULE_PATH", module_path.to_str().expect("utf-8 path"));
-
     cfg.define("CMAKE_VERBOSE_MAKEFILE", "ON")
         .register_dep("SNAPPY")
         .define("WITH_SNAPPY", "ON")
