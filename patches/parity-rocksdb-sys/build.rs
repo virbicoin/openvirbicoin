@@ -35,8 +35,16 @@ fn main() {
         let features = env::var("CARGO_CFG_TARGET_FEATURE")
             .expect("CARGO_CFG_TARGET_FEATURE is set by cargo.");
 
+        // Pin the MSVC C++ runtime explicitly so every object matches Rust's
+        // choice (dynamic /MD by default). Relying only on RocksDB's manual
+        // `/MD` flag is fragile (Release-config only) and can mix with the
+        // static runtime, producing LNK2005/LNK1169 at the final link.
+        cfg.define("CMAKE_POLICY_DEFAULT_CMP0091", "NEW");
         if features.contains("crt-static") {
             cfg.define("WITH_MD_LIBRARY", "OFF");
+            cfg.define("CMAKE_MSVC_RUNTIME_LIBRARY", "MultiThreaded");
+        } else {
+            cfg.define("CMAKE_MSVC_RUNTIME_LIBRARY", "MultiThreadedDLL");
         }
     } else {
         cfg.define("SNAPPY_INCLUDE_DIR", snappy)

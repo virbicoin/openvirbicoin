@@ -8,16 +8,31 @@ use cmake::Config;
 fn main() {
 	let src = env::current_dir().unwrap().join("snappy");
 
-	let out = Config::new("snappy")
-		.define("CMAKE_VERBOSE_MAKEFILE", "ON")
-		.build_target("snappy")
-		.build();
-
-	let mut build = out.join("build");
-
 	// NOTE: the cfg! macro doesn't work when cross-compiling, it would return values for the host
 	let target_os = env::var("CARGO_CFG_TARGET_OS").expect("CARGO_CFG_TARGET_OS is set by cargo.");
 	let target_env = env::var("CARGO_CFG_TARGET_ENV").expect("CARGO_CFG_TARGET_ENV is set by cargo.");
+
+	let mut cfg = Config::new("snappy");
+	cfg.define("CMAKE_VERBOSE_MAKEFILE", "ON")
+		.build_target("snappy");
+
+	// snappy's CMakeLists does not pick an MSVC runtime, so cl.exe defaults to
+	// the static runtime (/MT -> libcpmt.lib). Rust links the dynamic runtime
+	// (/MD -> msvcprt.lib) by default, which causes LNK2005/LNK1169 duplicate
+	// symbols at the final link. Force snappy to use the same runtime as Rust.
+	if target_env.contains("msvc") {
+		let features = env::var("CARGO_CFG_TARGET_FEATURE").unwrap_or_default();
+		cfg.define("CMAKE_POLICY_DEFAULT_CMP0091", "NEW");
+		if features.contains("crt-static") {
+			cfg.define("CMAKE_MSVC_RUNTIME_LIBRARY", "MultiThreaded");
+		} else {
+			cfg.define("CMAKE_MSVC_RUNTIME_LIBRARY", "MultiThreadedDLL");
+		}
+	}
+
+	let out = cfg.build();
+
+	let mut build = out.join("build");
 
 	if target_os.contains("windows") && target_env.contains("msvc") {
 		let stub = build.join("snappy-stubs-public.h");
