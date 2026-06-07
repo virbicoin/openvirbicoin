@@ -2,7 +2,7 @@
 description = "openvirbicoin (ovbc) - VirBiCoin client, an OpenEthereum fork"
 name = "openethereum"
 # NOTE Make sure to update util/version/Cargo.toml as well
-version = "3.3.6"
+version = "3.3.7"
 license = "GPL-3.0"
 authors = [
 	"OpenEthereum developers",

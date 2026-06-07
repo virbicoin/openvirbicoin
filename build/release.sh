@@ -137,7 +137,10 @@ run "git checkout main"
 run "sed -i -E 's/^version = \"${VERSION}\"/version = \"${NEXT_VERSION}\"/' \"$ROOT_MANIFEST\""
 run "sed -i -E 's/^version = \"${VERSION}\"/version = \"${NEXT_VERSION}\"/' \"$VERSION_MANIFEST\""
 # Keep Cargo.lock in sync so CI builds the new version without a lock mismatch.
-run "cargo update -p openethereum -p parity-version --offline 2>/dev/null || cargo update -p openethereum -p parity-version"
+# Only the two workspace crates (openethereum, parity-version) carry this
+# version, so a direct, offline rewrite is safe and avoids re-resolving the old
+# OpenEthereum git dependencies (which `cargo update` can fail on).
+run "sed -i -E 's/^version = \"${VERSION}\"\$/version = \"${NEXT_VERSION}\"/' Cargo.lock"
 run "git add \"$ROOT_MANIFEST\" \"$VERSION_MANIFEST\" Cargo.lock"
 run "git commit -m \"Begin next development cycle: v${NEXT_VERSION} unstable\""
 run "git push origin main"
