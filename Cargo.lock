@@ -3270,8 +3270,6 @@ dependencies = [
 [[package]]
 name = "parity-snappy-sys"
 version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a413d51e5e1927320c9de992998e4a279dffb8c8a7363570198bd8383e66f1b"
 dependencies = [
  "cmake",
  "libc",

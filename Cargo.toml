@@ -147,3 +147,8 @@ secp256k1-sys = { path = "patches/secp256k1-sys" }
 # transitively, but VS2022 needs it explicitly or system_clock is undefined,
 # which breaks the Windows build. Sources are otherwise unchanged.
 parity-rocksdb-sys = { path = "patches/parity-rocksdb-sys" }
+# Local patch of parity-snappy-sys 0.1.2. Together with the rocksdb patch, its
+# bundled CMakeLists.txt has cmake_minimum_required bumped to 3.5 so modern
+# CMake accepts it without CMAKE_POLICY_VERSION_MINIMUM (which would otherwise
+# put find_package into config-only mode and break the snappy lookup).
+parity-snappy-sys = { path = "patches/parity-snappy-sys" }

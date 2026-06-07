@@ -13,12 +13,6 @@ on:
 permissions:
   contents: write
 
-# Some bundled C/C++ dependencies (e.g. the snappy CMakeLists used by
-# parity-snappy-sys) still declare cmake_minimum_required below 3.5, which
-# modern CMake refuses by default. Allow them to configure anyway.
-env:
-  CMAKE_POLICY_VERSION_MINIMUM: "3.5"
-
 jobs:
   build:
     name: Build ${{ matrix.target }}
