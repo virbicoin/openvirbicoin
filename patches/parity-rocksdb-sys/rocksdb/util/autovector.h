@@ -120,22 +120,12 @@ class autovector {
     }
 
     // -- Reference
-    reference operator*() {
+    reference operator*() const {
       assert(vect_->size() >= index_);
       return (*vect_)[index_];
     }
 
-    const_reference operator*() const {
-      assert(vect_->size() >= index_);
-      return (*vect_)[index_];
-    }
-
-    pointer operator->() {
-      assert(vect_->size() >= index_);
-      return &(*vect_)[index_];
-    }
-
-    const_pointer operator->() const {
+    pointer operator->() const {
       assert(vect_->size() >= index_);
       return &(*vect_)[index_];
     }
