@@ -80,7 +80,9 @@ else()
   endif()
 
   if(WITH_SNAPPY)
-    find_package(snappy MODULE REQUIRED)
+    # find_package(snappy) is intentionally skipped: build.rs already provides
+    # SNAPPY_INCLUDE_DIR and the snappy static lib is linked from build.rs via
+    # cargo:rustc-link-lib. Newer CMake fails the module lookup here otherwise.
     add_definitions(-DSNAPPY)
     include_directories(${SNAPPY_INCLUDE_DIR})
     list(APPEND THIRDPARTY_LIBS ${SNAPPY_LIBRARIES})
