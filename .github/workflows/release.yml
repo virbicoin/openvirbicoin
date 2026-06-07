@@ -41,11 +41,19 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      # Pin a stable CMake. CMake 3.31 (current on the runners) rejects the old
+      # RocksDB/snappy projects: its internal try_compile uses a set() form that
+      # errors under cmake_minimum_required(3.5). 3.29 builds them fine.
+      - name: Install CMake 3.29
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: "3.29.6"
+
       - name: Install Linux build dependencies
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libudev-dev cmake clang libclang-dev pkg-config
+          sudo apt-get install -y libudev-dev clang libclang-dev pkg-config
 
       # cmake 0.1.46 detects VS2022 but doesn't know its generator name. Tell it
       # explicitly via CMAKE_GENERATOR so it skips its own (incomplete) probing
