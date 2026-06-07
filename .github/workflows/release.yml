@@ -54,21 +54,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libudev-dev cmake clang libclang-dev pkg-config
 
-      # The old cmake 0.1.42 crate (pulled in by parity-snappy-sys) cannot
-      # detect the Visual Studio 2022 generator. Set up the MSVC environment and
-      # force the Ninja generator, which sidesteps the VS-generator probing.
+      # cmake is bumped to 0.1.46 (see Cargo.toml patch), which recognises the
+      # Visual Studio 2022 generator, so we just need the MSVC toolchain on PATH.
       - name: Set up MSVC environment
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Install Ninja (Windows)
-        if: runner.os == 'Windows'
-        uses: seanmiddleditch/gha-setup-ninja@v5
-
-      - name: Use Ninja for CMake (Windows)
-        if: runner.os == 'Windows'
-        shell: bash
-        run: echo "CMAKE_GENERATOR=Ninja" >> "$GITHUB_ENV"
 
       - name: Cache cargo registry and target
         uses: actions/cache@v4
