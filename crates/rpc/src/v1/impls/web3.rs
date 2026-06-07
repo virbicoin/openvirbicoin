@@ -27,7 +27,11 @@ pub struct Web3Client;
 
 impl Web3 for Web3Client {
     fn client_version(&self) -> Result<String> {
-        Ok(version().to_owned().replacen("/", "//", 1))
+        // Report the version string as-is (e.g. "Ovbc/v3.3.6-stable/linux-amd64/
+        // rustc1.75.0") to match go-virbicoin (gvbc). Upstream OpenEthereum
+        // doubled the first slash to leave an empty identity slot, which made
+        // eth-netstats show "Ovbc//v...".
+        Ok(version().to_owned())
     }
 
     fn sha3(&self, data: Bytes) -> Result<H256> {

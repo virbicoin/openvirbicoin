@@ -24,7 +24,7 @@ fn rpc_web3_version() {
     let mut io = IoHandler::new();
     io.extend_with(web3);
 
-    let v = version().to_owned().replacen("/", "//", 1);
+    let v = version().to_owned();
 
     let request = r#"{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}"#;
     let response = r#"{"jsonrpc":"2.0","result":"VER","id":1}"#
