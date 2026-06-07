@@ -54,11 +54,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libudev-dev cmake clang libclang-dev pkg-config
 
-      # cmake is bumped to 0.1.46 (see Cargo.toml patch), which recognises the
-      # Visual Studio 2022 generator, so we just need the MSVC toolchain on PATH.
+      # cmake 0.1.46 detects VS2022 but doesn't know its generator name. Tell it
+      # explicitly via CMAKE_GENERATOR so it skips its own (incomplete) probing
+      # and lets the system CMake (which fully supports VS2022) configure snappy.
       - name: Set up MSVC environment
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Select CMake generator (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          echo "CMAKE_GENERATOR=Visual Studio 17 2022" >> "$GITHUB_ENV"
+          echo "CMAKE_GENERATOR_PLATFORM=x64" >> "$GITHUB_ENV"
 
       - name: Cache cargo registry and target
         uses: actions/cache@v4
