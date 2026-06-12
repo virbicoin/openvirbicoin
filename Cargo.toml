@@ -145,7 +145,9 @@ secp256k1-sys = { path = "patches/secp256k1-sys" }
 # Local patch of parity-rocksdb-sys 0.5.6 that adds `#include <chrono>` to the
 # bundled RocksDB 5.14 port/win/env_win.cc. Older MSVC pulled <chrono> in
 # transitively, but VS2022 needs it explicitly or system_clock is undefined,
-# which breaks the Windows build. Sources are otherwise unchanged.
+# which breaks the Windows build. The bundled CMakeLists.txt also drops the
+# 2018-era "Darwin + arm means iOS" branch that forced ROCKSDB_LITE (stripping
+# the whole C API) on Apple Silicon macOS. Sources are otherwise unchanged.
 parity-rocksdb-sys = { path = "patches/parity-rocksdb-sys" }
 # Local patch of parity-snappy-sys 0.1.2. Together with the rocksdb patch, its
 # bundled CMakeLists.txt has cmake_minimum_required bumped to 3.5 so modern

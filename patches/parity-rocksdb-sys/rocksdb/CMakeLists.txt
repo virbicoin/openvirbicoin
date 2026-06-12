@@ -364,11 +364,12 @@ if(CMAKE_SYSTEM_NAME MATCHES "Cygwin")
   add_definitions(-fno-builtin-memcmp -DCYGWIN)
 elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
   add_definitions(-DOS_MACOSX)
-  if(CMAKE_SYSTEM_PROCESSOR MATCHES arm)
-    add_definitions(-DIOS_CROSS_COMPILE -DROCKSDB_LITE)
-    # no debug info for IOS, that will make our library big
-    add_definitions(-DNDEBUG)
-  endif()
+  # The 2018-era "Darwin + arm processor means an iOS cross build" branch
+  # used to force IOS_CROSS_COMPILE and ROCKSDB_LITE here. On Apple Silicon
+  # Macs (CMAKE_SYSTEM_PROCESSOR=arm64) that stripped the entire C API out of
+  # db/c.cc and broke the final link of the Rust bindings. This project never
+  # builds for iOS, so the branch was removed; aarch64 macOS builds the same
+  # full library as x86_64 macOS.
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   add_definitions(-DOS_LINUX)
 elseif(CMAKE_SYSTEM_NAME MATCHES "SunOS")
