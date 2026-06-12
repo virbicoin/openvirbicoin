@@ -1,4 +1,4 @@
-name:                           Build and Test Suite
+name: Build and Test Suite
 
 on:
   pull_request:
@@ -6,9 +6,10 @@ on:
     branches:
       - main
       - dev
+
 jobs:
   build-tests:
-    name:                       Test and Build
+    name: Test and Build
     strategy:
       matrix:
         platform:
@@ -16,25 +17,20 @@ jobs:
           - macos-latest
         toolchain:
           - stable
-    runs-on:                    ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     steps:
-      - name:                   Checkout sources
-        uses:                   actions/checkout@main
+      - name: Checkout sources
+        uses: actions/checkout@v4
         with:
-          submodules:           true
-      - name:                   Install toolchain
-        uses:                   actions-rs/toolchain@v1
+          submodules: true
+
+      - name: Install toolchain
+        uses: dtolnay/rust-toolchain@master
         with:
-          toolchain:            ${{ matrix.toolchain }}
-          profile:              minimal
-          override:             true
-      - name:                   Build tests
-        uses:                   actions-rs/cargo@v1
-        with:
-          command:              test
-          args:                 --locked --all --release --features "json-tests" --verbose --no-run
-      - name:                   Run tests for ${{ matrix.platform }}	
-        uses:                   actions-rs/cargo@v1	
-        with:	
-          command:              test	
-          args:                 --locked --all --release --features "json-tests" --verbose
+          toolchain: ${{ matrix.toolchain }}
+
+      - name: Build tests
+        run: cargo test --locked --all --release --features "json-tests" --verbose --no-run
+
+      - name: Run tests for ${{ matrix.platform }}
+        run: cargo test --locked --all --release --features "json-tests" --verbose
