@@ -152,3 +152,10 @@ parity-rocksdb-sys = { path = "patches/parity-rocksdb-sys" }
 # CMake accepts it without CMAKE_POLICY_VERSION_MINIMUM (which would otherwise
 # put find_package into config-only mode and break the snappy lookup).
 parity-snappy-sys = { path = "patches/parity-snappy-sys" }
+# Local patch of ring 0.14.6 that adds aarch64-apple-darwin (Apple Silicon)
+# support by reusing the bundled Mach-O arm64 ("ios64") assembly — the same
+# mapping ring 0.16.16 later introduced upstream. Touches build.rs (ASM target
+# table) and src/cpu.rs (static feature flags, like iOS). Sources are otherwise
+# identical to the crates.io release, with the tests/ and third_party/NIST
+# test-vector directories dropped to keep the repository small.
+ring = { path = "patches/ring" }
