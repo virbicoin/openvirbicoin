@@ -12,7 +12,7 @@
   <a href="https://www.virbicoin.com">
     <img src="https://img.shields.io/badge/Website-virbicoin.com-cyan?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Website">
   </a>
-  <a href="https://github.com/virbicoin/openvirbicoin/releases">
+  <a href="https://github.com/virbicoin/open-virbicoin/releases">
     <img src="https://img.shields.io/badge/Downloads-Releases-green?style=for-the-badge&logo=github&logoColor=white" alt="Releases">
   </a>
   <a href="https://discord.virbicoin.com">
@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/virbicoin/openvirbicoin/actions/workflows/release.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/virbicoin/openvirbicoin/release.yml?style=flat-square&label=CI" alt="CI">
+  <a href="https://github.com/virbicoin/open-virbicoin/actions/workflows/release.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/virbicoin/open-virbicoin/release.yml?style=flat-square&label=CI" alt="CI">
   </a>
   <img src="https://img.shields.io/badge/Rust-1.75-orange?style=flat-square&logo=rust&logoColor=white" alt="Rust">
   <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square" alt="License: GPL-3.0">
@@ -38,12 +38,12 @@ not meant to run on the same machine at the same time.
 
 Automated builds are available for stable releases and the unstable `main`
 branch. Prebuilt binaries are published at
-https://github.com/virbicoin/openvirbicoin/releases/.
+https://github.com/virbicoin/open-virbicoin/releases/.
 
 ## Quick start
 
 Download the `ovbc` binary for your platform from the
-[Releases page](https://github.com/virbicoin/openvirbicoin/releases/latest), make
+[Releases page](https://github.com/virbicoin/open-virbicoin/releases/latest), make
 it executable, and run it — **no flags or config files required**:
 
 ```shell
@@ -82,8 +82,8 @@ Then build the release binary with the `final` feature (which marks the build as
 a `stable` release in the version string):
 
 ```shell
-git clone https://github.com/virbicoin/openvirbicoin
-cd openvirbicoin
+git clone https://github.com/virbicoin/open-virbicoin
+cd open-virbicoin
 cargo build --release --features final
 ```
 
@@ -169,7 +169,7 @@ cargo test --package <spec>
 | --- | --- |
 | [virbicoin.com](https://github.com/virbicoin/virbicoin.com) | Official website and protocol docs |
 | [go-virbicoin](https://github.com/virbicoin/go-virbicoin) | Main client (`gvbc`, Go implementation) |
-| **openvirbicoin** | Rust client (`ovbc`, OpenEthereum fork) |
+| **open-virbicoin** | Rust client (`ovbc`, OpenEthereum fork) |
 | [vbc-explorer](https://github.com/virbicoin/vbc-explorer) | Block explorer |
 | [vbc-stats](https://github.com/virbicoin/vbc-stats) | Network statistics dashboard |
 | [vbc-pool](https://github.com/virbicoin/vbc-pool) | Mining pool |

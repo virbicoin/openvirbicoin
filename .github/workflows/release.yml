@@ -1,6 +1,6 @@
 name: Release ovbc binaries
 
-# Build the openvirbicoin (ovbc) client and publish the binaries to a GitHub
+# Build the open-virbicoin (ovbc) client and publish the binaries to a GitHub
 # Release whenever a version tag is pushed. Users can then download a prebuilt
 # binary from the Releases page and run it with no arguments to join the
 # VirBiCoin network.

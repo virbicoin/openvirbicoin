@@ -1,5 +1,5 @@
 [package]
-description = "openvirbicoin (ovbc) - VirBiCoin client, an OpenEthereum fork"
+description = "open-virbicoin (ovbc) - VirBiCoin client, an OpenEthereum fork"
 name = "openethereum"
 # NOTE Make sure to update util/version/Cargo.toml as well
 version = "3.3.8"

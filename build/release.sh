@@ -40,7 +40,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 ROOT_MANIFEST="Cargo.toml"
 VERSION_MANIFEST="crates/util/version/Cargo.toml"
-REPO="virbicoin/openvirbicoin"
+REPO="virbicoin/open-virbicoin"
 DRY_RUN=0
 [[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
 
