@@ -50,6 +50,20 @@ it executable, and run it — **no flags or config files required**:
 ./ovbc
 ```
 
+Prebuilt binaries are available for:
+
+| OS      | Architecture            | Archive                        |
+| ------- | ----------------------- | ------------------------------ |
+| Linux   | x86_64                  | `ovbc-linux-x86_64.tar.gz`     |
+| Linux   | aarch64 (arm64)         | `ovbc-linux-aarch64.tar.gz`    |
+| Windows | x86_64                  | `ovbc-windows-x86_64.zip`      |
+| macOS   | x86_64 (Intel)          | `ovbc-darwin-x86_64.tar.gz`    |
+| macOS   | aarch64 (Apple Silicon) | `ovbc-darwin-aarch64.tar.gz`   |
+
+There is no native Windows arm64 binary (the vintage dependency tree cannot
+target it); on Windows on ARM, run `ovbc-windows-x86_64.zip` through the
+built-in x64 emulation.
+
 It connects to the VirBiCoin network (chainId 329) out of the box and exposes the
 JSON-RPC endpoints on the standard VirBiCoin ports:
 
@@ -63,7 +77,7 @@ Once running, the node reports its client identity in the same shape as `gvbc`,
 for example:
 
 ```
-Ovbc/v3.3.5-stable/linux-amd64/rustc1.75.0
+Ovbc/v3.3.8-stable/linux-amd64/rustc1.75.0
 ```
 
 ## Building the source
@@ -76,6 +90,14 @@ On Debian/Ubuntu, install the build dependencies:
 
 ```shell
 sudo apt-get install -y build-essential pkg-config libudev-dev clang libclang-dev cmake
+```
+
+On macOS, install the Xcode Command Line Tools and CMake (both Intel and Apple
+Silicon Macs are supported):
+
+```shell
+xcode-select --install
+brew install cmake
 ```
 
 Then build the release binary with the `final` feature (which marks the build as
@@ -98,8 +120,9 @@ Run the client directly; it joins VirBiCoin with no further configuration:
 ./target/release/ovbc
 ```
 
-The data directory defaults to `~/.local/share/openvirbicoin` on Linux. A few
-common flags:
+The data directory defaults to `~/.local/share/openvirbicoin` on Linux,
+`~/Library/Application Support/OpenVirBiCoin` on macOS and
+`%APPDATA%\OpenVirBiCoin` on Windows. A few common flags:
 
 ```shell
 # Enable the HTTP JSON-RPC server on all interfaces
