@@ -172,7 +172,7 @@ cargo test --package <spec>
 | **openvirbicoin** | Rust client (`ovbc`, OpenEthereum fork) |
 | [vbc-explorer](https://github.com/virbicoin/vbc-explorer) | Block explorer |
 | [vbc-stats](https://github.com/virbicoin/vbc-stats) | Network statistics dashboard |
-| [open-virbicoin-pool](https://github.com/virbicoin/open-virbicoin-pool) | Mining pool |
+| [vbc-pool](https://github.com/virbicoin/vbc-pool) | Mining pool |
 
 ## License
 
