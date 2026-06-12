@@ -7,7 +7,16 @@
 				"minimumDifficulty": "0x20000",
 				"difficultyBoundDivisor": "0x200",
 				"durationLimit": "0xc",
-				"blockReward": "0x6f05b59d3b200000",
+				"blockReward": {
+					"0x0": "0x6f05b59d3b200000",
+					"0x401640": "0x6124fee993bc0000",
+					"0x802c80": "0x53444835ec580000",
+					"0xc042c0": "0x4563918244f40000",
+					"0x1005900": "0x3782dace9d900000",
+					"0x1406f40": "0x29a2241af62c0000",
+					"0x1808580": "0x1bc16d674ec80000",
+					"0x1c09bc0": "0xde0b6b3a7640000"
+				},
 				"homesteadTransition": "0x0",
 				"eip100bTransition": "0x0",
 				"difficultyBombDelays": {
