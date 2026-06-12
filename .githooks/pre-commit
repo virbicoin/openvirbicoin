@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+# Pre-commit hook: mirror the fast CI checks (rustfmt) before committing.
+# Enable with: git config core.hooksPath .githooks
+#
+# A repo-local core.hooksPath overrides the user's global hooks, so chain
+# the global pre-commit first (e.g. a GPG passphrase cache warmer).
+global_hooks=$(git config --global core.hooksPath 2>/dev/null)
+if [ -n "$global_hooks" ] && [ -x "$global_hooks/pre-commit" ]; then
+  "$global_hooks/pre-commit" || exit 1
+fi
+
+echo "> pre-commit: cargo fmt --all -- --check (same as CI)..."
+if ! cargo fmt --all -- --check; then
+  echo ""
+  echo "x Formatting check failed; commit aborted."
+  echo "  Run 'cargo fmt' to fix."
+  exit 1
+fi
+echo "+ pre-commit: formatting OK."

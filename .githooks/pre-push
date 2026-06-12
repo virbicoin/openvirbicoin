@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+# Pre-push hook: mirror the CI Check workflow before pushing
+# (cargo check + chainspec validation).
+# Enable with: git config core.hooksPath .githooks
+
+echo "> pre-push: cargo check --locked --all (same as CI)..."
+if ! cargo check --locked --all; then
+  echo ""
+  echo "x cargo check failed; push aborted."
+  exit 1
+fi
+
+echo "> pre-push: validating chainspecs (same as CI)..."
+if ! cargo build --locked --release -p chainspec; then
+  echo ""
+  echo "x chainspec build failed; push aborted."
+  exit 1
+fi
+for spec in crates/ethcore/res/chainspec/*.json crates/ethcore/res/chainspec/test/*.json; do
+  if ! ./target/release/chainspec "$spec"; then
+    echo ""
+    echo "x Invalid chainspec: $spec; push aborted."
+    exit 1
+  fi
+done
+echo "+ pre-push: checks passed."
