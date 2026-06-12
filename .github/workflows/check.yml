@@ -14,11 +14,9 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
-      - name: Install stable toolchain
-        uses: dtolnay/rust-toolchain@stable
+      - name: Install toolchain
+        uses: dtolnay/rust-toolchain@1.75.0
 
       - name: Run cargo check 1/3
         run: cargo check --locked --no-default-features --verbose
