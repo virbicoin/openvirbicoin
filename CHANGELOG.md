@@ -1,3 +1,32 @@
+## OpenVirBiCoin (ovbc) v3.3.8
+
+Consensus:
+* **Gradual block reward reduction**, matching go-virbicoin: the reward
+  decreases by 1 VBC every 2,100,000 blocks (8 → 7 → … → 1 VBC, first
+  reduction at block 2,100,000, 1 VBC minimum), encoded as `blockReward`
+  boundaries in the built-in VirBiCoin chain spec.
+
+Platforms and CI:
+* Publish **macOS** release binaries for both **darwin x86_64** (Intel) and
+  **darwin aarch64 (Apple Silicon)**, alongside linux x86_64/aarch64 and
+  windows x86_64. The binaries are portable Mach-O executables linking only
+  system libraries.
+* Patch the pinned `ring 0.14.6` locally (`patches/ring`) to support Apple
+  Silicon by reusing its bundled Mach-O arm64 (iOS) assembly — the same
+  mapping ring 0.16.16 later introduced upstream.
+* Fix the bundled RocksDB 5.14 CMake build treating "Darwin + arm" as an iOS
+  cross build: it forced `ROCKSDB_LITE`, which silently stripped the whole
+  RocksDB C API on Apple Silicon and broke the final link.
+* Windows arm64 remains unsupported (`winapi 0.2`/`mio 0.6` have no aarch64
+  definitions and `ring` only gained Windows arm64 support in 0.17);
+  Windows-on-ARM users can run the x86_64 binary through Windows 11's
+  built-in x64 emulation.
+
+Toolchain and build:
+* Force-include `<cstdint>` for the vendored RocksDB so it builds with GCC 13.
+* Add git hooks mirroring the CI checks (rustfmt on commit, `cargo check` and
+  chainspec validation on push) and simplify the CI workflows.
+
 ## OpenVirBiCoin (ovbc) v3.3.7
 
 First public stable release of **openvirbicoin** (`ovbc`), a rebrand of
