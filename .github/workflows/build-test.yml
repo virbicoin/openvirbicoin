@@ -1,4 +1,4 @@
-name: Build and Test Suite
+name: Build
 
 on:
   pull_request:
