@@ -53,3 +53,4 @@ remote-target
 # AI agent guidance (local only, may contain Japanese; see language policy)
 /CLAUDE.md
 
+.claude/

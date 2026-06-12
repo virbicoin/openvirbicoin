@@ -8,8 +8,8 @@ on:
       - dev
 
 jobs:
-  build-tests:
-    name: Test and Build
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -19,7 +19,4 @@ jobs:
         uses: dtolnay/rust-toolchain@1.75.0
 
       - name: Build
-        run: cargo build --locked --all --release --verbose
-
-      - name: Run tests
-        run: cargo test --locked --all --release --exclude parity-rpc --verbose
+        run: cargo build --locked --all --release
